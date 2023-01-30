@@ -1,8 +1,8 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 var input9AM = $('#input-9AM')
-var save9AM = $('#button-9AM')
+var input10AM = $('#input-10AM')
+var input11AM = $('#input-11AM')
+// add through 5PM
+var saveItem = $('.saveBtn')
 var currentDay = $('#currentDay');
 
 var now = dayjs().format('dddd, MMMM D')
@@ -72,16 +72,26 @@ else if (timeNow === dayTimes[index-9]) {
   } 
 function saveText9AM(event) {
 event.preventDefault();
+console.log(this.id)
+if (this.id === "button-9AM") {
+  var  nineAM = input9AM.val();
+  localStorage.setItem('stored9AM', nineAM)
+  
+}
+else if (this.id === "button-10AM") {
+  var  tenAM = input10AM.val();
+  localStorage.setItem('stored10AM', tenAM) 
+}
 
-var  nineAM = input9AM.val();
-console.log(nineAM)
 
-localStorage.setItem('stored9AM', nineAM)
+
 }
 
 var   stored9AM = localStorage.getItem('stored9AM')
 $("#input-9AM").val(stored9AM)
 
+var   stored10AM = localStorage.getItem('stored10AM')
+$("#input-10AM").val(stored10AM)
 
  
 
@@ -108,7 +118,7 @@ $("#input-9AM").val(stored9AM)
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  save9AM.on("click", saveText9AM)
+  saveItem.on("click", saveText9AM)
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -118,58 +128,4 @@ $("#input-9AM").val(stored9AM)
   // useful when saving the description in local storage?
 });
 
-
-// btn9AM.addEventListener("click", );
-// localStorage.setItem("email", email);
-// localStorage.setItem("user", JSON.stringify(user));
-
-//  // create user object from submission
-//  var user = {
-//   firstName: firstNameInput.value.trim(),
-//   lastName: lastNameInput.value.trim(),
-//   email: emailInput.value.trim(),
-//   password: passwordInput.value.trim()
-// };
-
-// // set new submission to local storage 
-// localStorage.setItem("user", JSON.stringify(user));
-
-// // Clear todoList element and update todoCountSpan
-// todoList.innerHTML = "";
-// todoCountSpan.textContent = todos.length;
-
-// var todos = [];
-
-// // The following function renders items in a todo list as <li> elements
-// function renderTodos() {
-//   // Clear todoList element and update todoCountSpan
-//   todoList.innerHTML = "";
-//   todoCountSpan.textContent = todos.length;
-
-  // // Add new todoText to todos array, clear the input
-  // todos.push(todoText);
-  // todoInput.value = "";
-
-//   // Store updated todos in localStorage, re-render the list
-//   storeTodos();
-//   renderTodos();
-// });
-
-// // Add click event to todoList element
-// todoList.addEventListener("click", function(event) {
-//   var element = event.target;
-
-// // Add click event to todoList element
-// todoList.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   // Checks if element is a button
-//   if (element.matches("button") === true) {
-//     // Get its data-index value and remove the todo element from the list
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-
-//     // Store updated todos in localStorage, re-render the list
-//     storeTodos();
-//     renderTodos();
 
